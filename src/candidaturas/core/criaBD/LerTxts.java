@@ -17,8 +17,7 @@ public class LerTxts extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     public LerTxts() {
-        super();
-        // TODO Auto-generated constructor stub
+        super();      
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -31,6 +30,10 @@ public class LerTxts extends HttpServlet {
 	
 	protected void lerReceitaTxt(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//request.getParameter(null);
+		// inserir hibernate no projeto
+		// Instlaar mysql 
+		// criar m odelos no hbinertate
+		// ler primeiro arquivo
 		PrintWriter out = response.getWriter();
 		out.println("<HTML><BODY>" + request.getParameter("nomeArquivo") + "</BODY></HTML>");
 		
