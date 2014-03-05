@@ -28,7 +28,7 @@
 	<classpathentry kind="lib" path="/home/u13/Desktop/Biblioteca/hibernatelib/hibernate-envers-4.3.2.Final.jar"/>
 	<classpathentry kind="lib" path="/home/u13/Desktop/Biblioteca/hibernatelib/hibernate-infinispan-4.3.2.Final.jar"/>
 	<classpathentry kind="lib" path="/home/u13/Desktop/Biblioteca/hibernatelib/hibernate-infinispan-4.3.2.Final-tests.jar"/>
-	<classpathentry kind="lib" path="/home/u13/Desktop/Biblioteca/hibernatelib/hibernate-jpa-2.1-api-1.0.0.Final.jar"/>
+	<classpathentry exported="true" kind="lib" path="/home/u13/Desktop/Biblioteca/hibernatelib/hibernate-jpa-2.1-api-1.0.0.Final.jar"/>
 	<classpathentry kind="lib" path="/home/u13/Desktop/Biblioteca/hibernatelib/hibernate-jpamodelgen-4.3.2.Final.jar"/>
 	<classpathentry kind="lib" path="/home/u13/Desktop/Biblioteca/hibernatelib/hibernate-osgi-4.3.2.Final.jar"/>
 	<classpathentry kind="lib" path="/home/u13/Desktop/Biblioteca/hibernatelib/hibernate-proxool-4.3.2.Final.jar"/>
@@ -53,5 +53,6 @@
 	<classpathentry kind="lib" path="/home/u13/Desktop/Biblioteca/hibernatelib/slf4j-api-1.6.1.jar"/>
 	<classpathentry kind="lib" path="/home/u13/Desktop/Biblioteca/hibernatelib/slf4j-api-1.7.6.jar"/>
 	<classpathentry kind="lib" path="/home/u13/Desktop/Biblioteca/hibernatelib/slf4j-log4j12-1.7.6.jar"/>
+	<classpathentry kind="con" path="org.eclipse.datatools.connectivity.jdt.DRIVERLIBRARY/MySQL JDBC Driver"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>

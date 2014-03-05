@@ -1,18 +1,20 @@
-<?xml version="1.0" encoding="UTF-8"?> 
+<?xml version="1.0" encoding="UTF-8"?>
 
-<persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd"> 
-<persistence-unit name="candidaturasdb"> 
-<provider>org.hibernate.ejb.HibernatePersistence</provider>
+<persistence version="1.0"
+	xmlns="http://xmlns.jcp.org/xml/ns/persistence" 
+	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
+	<persistence-unit name="candidaturasdb">
+		<provider>org.hibernate.ejb.HibernatePersistence</provider>
 
- <properties>
-  <property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect" /> 
-  <property name="hibernate.hbm2ddl.auto" value="update" /> 
-  <property name="hibernate.show_sql" value="true" /> 
-  <property name="hibernate.format_sql" value="true" /> 
-  <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver" /> 
-  <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost/candidaturasdb" />
-  <property name="javax.persistence.jdbc.user" value="candidaturauser" /> 
-  <property name="javax.persistence.jdbc.password" value="c2012" /> 
- </properties>
- </persistence-unit>
- </persistence>
+		<properties>
+			<property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect" />
+			<property name="hibernate.hbm2ddl.auto" value="update" />
+			<property name="hibernate.show_sql" value="true" />
+			<property name="hibernate.format_sql" value="true" />
+			<property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver" />
+			<property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost/candidaturasdb" />
+			<property name="javax.persistence.jdbc.user" value="candidaturauser" />
+			<property name="javax.persistence.jdbc.password" value="c2012" />
+		</properties>
+	</persistence-unit>
+</persistence>	
