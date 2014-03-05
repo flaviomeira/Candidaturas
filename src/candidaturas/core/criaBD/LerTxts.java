@@ -37,12 +37,6 @@ public class LerTxts extends HttpServlet {
 	}
 	
 	protected void lerReceitaTxt(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//request.getParameter(null);
-		// inserir hibernate no projeto
-		// Instlaar mysql 
-		// criar m odelos no hbinertate
-		// ler primeiro arquivo
-		
 		
 		EntityManagerFactory factory = Persistence.createEntityManagerFactory("candidaturasdb"); 
 		EntityManager em = factory.createEntityManager();
