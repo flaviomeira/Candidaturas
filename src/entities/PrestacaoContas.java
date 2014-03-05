@@ -14,7 +14,8 @@ import org.hibernate.annotations.Table;
 public class PrestacaoContas {
 	@GeneratedValue
 	@Id
-	@Column Timestamp Data_e_hora;
+	int id;
+	String Data_e_hora;
 	String Sequencial_Candidato;
 	String UF;
 	String Numero_UE;
@@ -41,10 +42,10 @@ public class PrestacaoContas {
 	String Especie_recurso;
 	String Descricao_da_receita;
 	
-	public Timestamp getData_e_hora() {
+	public String getData_e_hora() {
 		return Data_e_hora;
 	}
-	public void setData_e_hora(Timestamp data_e_hora) {
+	public void setData_e_hora(String data_e_hora) {
 		Data_e_hora = data_e_hora;
 	}
 	public String getSequencial_Candidato() {
@@ -84,7 +85,6 @@ public class PrestacaoContas {
 		Numero_candidato = numero_candidato;
 	}
 	
-	@Column (name = "Cargo")
 	public String getCargo() {
 		return Cargo;
 	}
