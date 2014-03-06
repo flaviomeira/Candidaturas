@@ -11,7 +11,7 @@ import org.hibernate.annotations.Table;
 
 @Entity
 @Table(appliesTo = "PrestacaoContas")
-public class PrestacaoContas {
+public class ReceitasCandidatos {
 	@GeneratedValue
 	@Id
 	int id;

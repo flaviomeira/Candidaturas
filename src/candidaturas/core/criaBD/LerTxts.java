@@ -1,57 +1,55 @@
 package candidaturas.core.criaBD;
 
-import java.io.Console;
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.io.Writer;
-
-
-import javax.servlet.ServletException;
-//import javax.servlet.ServletResponse;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
-import entities.PrestacaoContas;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
+import sun.org.mozilla.javascript.ast.TryStatement;
+import entities.ReceitasCandidatos;
 
-@WebServlet("/LerTxts")
-public class LerTxts extends HttpServlet {
-	private static final long serialVersionUID = 1L;
-       
-    public LerTxts() {
-        super();      
-    }
-
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-	}
-
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		lerReceitaTxt(request, response);
-	}
+public class LerTxts {
 	
-	protected void lerReceitaTxt(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public static void receitasCandidatosTxt2BD() {
+		String nomeTXT = "/home/u13/Projetos/DadosTXT/PrestacaoFinal/candidato/SP/ReceitasCandidatos.txt";
 		
+		/* Descomentar apos conseguir pegar os valores do txt corretamente
 		EntityManagerFactory factory = Persistence.createEntityManagerFactory("candidaturasdb"); 
 		EntityManager em = factory.createEntityManager();
+		ReceitasCandidatos receitas = new ReceitasCandidatos();
+		*/
 		
-		PrestacaoContas prestContas = new PrestacaoContas();
-		prestContas.setCargo("TesteCargo");
-		
-		em.getTransaction().begin();
-		em.persist(prestContas);
-		em.getTransaction().commit();
-		
-		PrintWriter out = response.getWriter();
-		
-		out.println("<HTML><BODY>" + request.getParameter("nomeArquivo") + "</BODY></HTML>");
-		
+		try{
+		FileReader arq = new FileReader(nomeTXT);
+	    BufferedReader lerArq = new BufferedReader(arq);
+	    String linha = lerArq.readLine();	//le primeira linha
+	    System.out.println(linha);
+	  /*  while (linha != null) {
+			linha = lerArq.readLine();
+			
+		}
+	    */
+		}
+		catch (IOException e) {
+			System.out.println(e.getMessage());
+		}
 	}
 
+	
+	
+	public static void main(String[] args) {
+		receitasCandidatosTxt2BD();
+
+	}
+	
+	
+	public enum TXTReceitasCandidatos {
+		
+	}
+	
+	
 }
