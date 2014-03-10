@@ -1,6 +1,7 @@
 package candidaturas.core.criaBD;
 
 import java.io.BufferedReader;
+import java.lang.reflect.Method;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
@@ -13,6 +14,8 @@ import sun.org.mozilla.javascript.ast.TryStatement;
 import entities.ReceitasCandidatos;
 
 public class LerTxts {
+	
+
 
 	public enum MapCamposReceitasCandidatos {	
 		Data_e_hora(0), Sequencial_Candidato(1), UF(2), Numero_UE(3), Municipio(4), Sigla_Partido(5), 
@@ -31,56 +34,76 @@ public class LerTxts {
 		}
 	}
 	
+	
 	public static void receitasCandidatosTxt2BD() {
 		// ainda falta:
-		// Criar ENUM para mapear campos do banco com indice da lista "campos"
+		// PENSAR EM USAR UM SWITCH CASE DENTRO DO FOR E MAPEAR OS CAMPOS NO SWITCH CASE - MUDAR DA ABORDAGEM DO ENBUM
 		// ver http://www.devmedia.com.br/tipos-enum-no-java/25729
 		
+		MapCamposReceitasCandidatos camposMapeados = null;	
 		String nomeTXT = "/home/u13/Projetos/DadosTXT/PrestacaoFinal/candidato/SP/ReceitasCandidatos.txt";
 		String campos[];
+		String nomeMetodo;
 		FileReader arq;
 		BufferedReader lerArq;
 
-		/*
-		 * Descomentar apos conseguir pegar os valores do txt corretamente
-		 * EntityManagerFactory factory =
-		 * Persistence.createEntityManagerFactory("candidaturasdb");
-		 * EntityManager em = factory.createEntityManager(); ReceitasCandidatos
-		 * receitas = new ReceitasCandidatos();
-		 */
+		EntityManagerFactory factory = Persistence.createEntityManagerFactory("candidaturasdb");
+		EntityManager em = factory.createEntityManager(); 
+		ReceitasCandidatos receitas = new ReceitasCandidatos();
 
 		try {
+
+			
 			int i = 0;
 			arq = new FileReader(nomeTXT);
 			lerArq = new BufferedReader(arq);
 			String linha = lerArq.readLine(); // le primeira linha
-			System.out.println(linha);
+			
+			//System.out.println(linha);
 
 			while (linha != null) {
 				linha = lerArq.readLine();
-				
-				//debug
-				//System.out.println(linha);
-				
-				if (linha != null) {		//if colocado pois o readline (que avanca a posicao do txt) ta dentro do while 
+
+				if (linha != null) {		//if colocado pois o readline (que avanca a posicao do txt) ta dentro do while. Na ultima posicao da merda
 					linha.replace("\"", "");
 					linha.replace(" ", "_");
-
 					campos = linha.split(";");
-					System.out.println(i + "\n");
+					//for (int j = 0; j < campos.length; j++){
+					for (int j = 0; j < 5; j++){
+						nomeMetodo = "set" + camposMapeados.values()[j].toString();
+											
+						
+						if(j < 5){
+						
+							Class argsType[] = new Class[1];
+							argsType[0] = String.class;						
+							Class classeReceitasCandidatos = Class.forName("ReceitasCandidatos");
+							Method metodo = classeReceitasCandidatos.getMethod(nomeMetodo, argsType);
+							
+							
+						//	problema para passar arg string para funcao.....
+							Object argList = new String();
+							argList = new String(campos[j]);
+							
+							metodo.invoke(receitas, argList);
+							
+							//System.out.println(nomeMetodo);	
+							em.getTransaction().begin();
+							em.persist(receitas);
+							em.getTransaction().commit();
+						}
+					}
 				}
-				
-				//debug
-				/*i++;
-				System.out.println(campos[0] + "\n");
-				System.out.println(campos[1] + "\n");*/
-				
 			}
-			
+
 			lerArq.close();
-		} catch (IOException e) {
-			System.out.println(e.getMessage());
+		
+		} catch (Throwable e){
+			System.err.println(e.getMessage());
+			System.out.println("erro");
 		}
+		
+		System.out.println("Terminou");
 		
 	}
 
