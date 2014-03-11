@@ -1,5 +1,6 @@
 package candidaturas.core.criaBD;
 
+
 import java.io.BufferedReader;
 import java.lang.reflect.Method;
 import java.io.FileNotFoundException;
@@ -12,6 +13,7 @@ import javax.persistence.Persistence;
 
 import sun.org.mozilla.javascript.ast.TryStatement;
 import entities.ReceitasCandidatos;
+
 
 public class LerTxts {
 	
@@ -49,7 +51,7 @@ public class LerTxts {
 
 		EntityManagerFactory factory = Persistence.createEntityManagerFactory("candidaturasdb");
 		EntityManager em = factory.createEntityManager(); 
-		ReceitasCandidatos receitas = new ReceitasCandidatos();
+		ReceitasCandidatos receitas;
 
 		try {
 
@@ -63,53 +65,53 @@ public class LerTxts {
 
 			while (linha != null) {
 				linha = lerArq.readLine();
-
-				if (linha != null) {		//if colocado pois o readline (que avanca a posicao do txt) ta dentro do while. Na ultima posicao da merda
+			
+				if (linha != null) {	//if colocado para nao dar erro no ultimo registro
+					
+					// para criar novo registro no banco tem que criar um objeto da entity (new ReceitasCandidatos())
+					receitas = new ReceitasCandidatos();					
 					linha.replace("\"", "");
 					linha.replace(" ", "_");
 					campos = linha.split(";");
-					//for (int j = 0; j < campos.length; j++){
-					for (int j = 0; j < 5; j++){
+					for (int j = 0; j < campos.length; j++){						
 						nomeMetodo = "set" + camposMapeados.values()[j].toString();
-											
 						
-						if(j < 5){
+						//preparando argumentos para preparar metodo set<Nomedocampo> 
+						Class argsType[] = new Class[1];
+						argsType[0] = String.class;
 						
-							Class argsType[] = new Class[1];
-							argsType[0] = String.class;						
-							Class classeReceitasCandidatos = Class.forName("ReceitasCandidatos");
-							Method metodo = classeReceitasCandidatos.getMethod(nomeMetodo, argsType);
-							
-							
-						//	problema para passar arg string para funcao.....
-							Object argList = new String();
-							argList = new String(campos[j]);
-							
-							metodo.invoke(receitas, argList);
-							
-							//System.out.println(nomeMetodo);	
-							em.getTransaction().begin();
-							em.persist(receitas);
-							em.getTransaction().commit();
-						}
+						//busca a classe que contem o metodo a ser usado
+						Class<?> classeReceitasCandidatos = Class.forName("entities.ReceitasCandidatos");
+						Method metodo = classeReceitasCandidatos.getMethod(nomeMetodo, argsType);
+						
+						//insere valor do TXT nos argumentos
+						Object argList = new String();
+						argList = new String(campos[j]);
+						
+						//executa metodo com o valor de nomeMetodo
+						metodo.invoke(receitas, argList);
+						
+						em.getTransaction().begin();
+						em.persist(receitas);
+						em.getTransaction().commit();
+
 					}
+					
 				}
 			}
 
 			lerArq.close();
-		
-		} catch (Throwable e){
+			
+		} catch (ClassNotFoundException clsEx){
+			System.err.println(clsEx.getMessage());
+		} catch ( Exception e){
 			System.err.println(e.getMessage());
-			System.out.println("erro");
-		}
-		
-		System.out.println("Terminou");
-		
+		} 
 	}
 
 	public static void main(String[] args) {
 		receitasCandidatosTxt2BD();
-
+		System.out.println("Terminou");
 	}
 
 	public enum TXTReceitasCandidatos {

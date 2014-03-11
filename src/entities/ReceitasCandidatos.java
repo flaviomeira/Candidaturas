@@ -40,6 +40,7 @@ public class ReceitasCandidatos {
 	String Tipo_receita;
 	String Fonte_recurso;
 	String Especie_recurso;
+	@Column(columnDefinition="TEXT")
 	String Descricao_da_receita;
 	
 	public String getData_e_hora() {
