@@ -1,3 +1,4 @@
+//<property name="javax.persistence.jdbc.user" value="candidaturauser" />
 package candidaturas.core.criaBD;
 
 
@@ -38,75 +39,17 @@ public class LerTxts {
 	
 	
 	public static void receitasCandidatosTxt2BD() {
-		// ainda falta:
-		// PENSAR EM USAR UM SWITCH CASE DENTRO DO FOR E MAPEAR OS CAMPOS NO SWITCH CASE - MUDAR DA ABORDAGEM DO ENBUM
-		// ver http://www.devmedia.com.br/tipos-enum-no-java/25729
-		
-		MapCamposReceitasCandidatos camposMapeados = null;	
-		String nomeTXT = "/home/u13/Projetos/DadosTXT/PrestacaoFinal/candidato/SP/ReceitasCandidatos.txt";
-		String campos[];
-		String nomeMetodo;
-		FileReader arq;
-		BufferedReader lerArq;
-
+					
+		String nomeTXT = "/home/u13/Projetos/DadosTXT/PrestacaoFinal/candidato/SP/ReceitasCandidatos.csv";
 		EntityManagerFactory factory = Persistence.createEntityManagerFactory("candidaturasdb");
 		EntityManager em = factory.createEntityManager(); 
-		ReceitasCandidatos receitas;
-
-		try {
-
-			
-			int i = 0;
-			arq = new FileReader(nomeTXT);
-			lerArq = new BufferedReader(arq);
-			String linha = lerArq.readLine(); // le primeira linha
-			
-			//System.out.println(linha);
-
-			while (linha != null) {
-				linha = lerArq.readLine();
-			
-				if (linha != null) {	//if colocado para nao dar erro no ultimo registro
-					
-					// para criar novo registro no banco tem que criar um objeto da entity (new ReceitasCandidatos())
-					receitas = new ReceitasCandidatos();					
-					linha.replace("\"", "");
-					linha.replace(" ", "_");
-					campos = linha.split(";");
-					for (int j = 0; j < campos.length; j++){						
-						nomeMetodo = "set" + camposMapeados.values()[j].toString();
-						
-						//preparando argumentos para preparar metodo set<Nomedocampo> 
-						Class argsType[] = new Class[1];
-						argsType[0] = String.class;
-						
-						//busca a classe que contem o metodo a ser usado
-						Class<?> classeReceitasCandidatos = Class.forName("entities.ReceitasCandidatos");
-						Method metodo = classeReceitasCandidatos.getMethod(nomeMetodo, argsType);
-						
-						//insere valor do TXT nos argumentos
-						Object argList = new String();
-						argList = new String(campos[j]);
-						
-						//executa metodo com o valor de nomeMetodo
-						metodo.invoke(receitas, argList);
-						
-						em.getTransaction().begin();
-						em.persist(receitas);
-						em.getTransaction().commit();
-
-					}
-					
-				}
-			}
-
-			lerArq.close();
-			
-		} catch (ClassNotFoundException clsEx){
-			System.err.println(clsEx.getMessage());
-		} catch ( Exception e){
-			System.err.println(e.getMessage());
-		} 
+		
+		ReceitasCandidatos receitas = new ReceitasCandidatos();
+		
+		em.getTransaction().begin();
+		em.createNativeQuery("LOAD DATA LOCAL INFILE :fileName INTO TABLE ReceitasCandidatos fields terminated by \",\" lines terminated by \"\\\n\" ").setParameter("fileName", nomeTXT).executeUpdate();
+		em.persist(receitas);
+		em.getTransaction().commit();
 	}
 
 	public static void main(String[] args) {
