@@ -163,3 +163,34 @@ CREATE TABLE IF NOT EXISTS `receitas_sp` (
   `setor_economico_doador_originario` varchar(50) COLLATE latin1_bin DEFAULT NULL,
   `nome_doador_originario_receita_federal` varchar(150) COLLATE latin1_bin DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_bin;
+
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `despesas_2012`
+--
+
+CREATE TABLE IF NOT EXISTS `despesas_2012` (
+  `data_hora` varchar(30) COLLATE latin1_bin DEFAULT NULL,
+  `sequencial_candidato` varchar(20) COLLATE latin1_bin DEFAULT NULL,
+  `uf` varchar(5) COLLATE latin1_bin DEFAULT NULL,
+  `numero_ue` varchar(25) COLLATE latin1_bin DEFAULT NULL,
+  `municipio` varchar(100) COLLATE latin1_bin DEFAULT NULL,
+  `sigla_partido` varchar(10) COLLATE latin1_bin DEFAULT NULL,
+  `numero_candidato` varchar(10) COLLATE latin1_bin DEFAULT NULL,
+  `cargo` varchar(50) COLLATE latin1_bin DEFAULT NULL,
+  `nome_candidato` varchar(200) COLLATE latin1_bin DEFAULT NULL,
+  `cpf_candidato` varchar(16) COLLATE latin1_bin DEFAULT NULL,
+  `tipo_documento` varchar(100) COLLATE latin1_bin DEFAULT NULL,
+  `numero_documento` varchar(10) COLLATE latin1_bin DEFAULT NULL,
+  `cpf_cnpj_fornecedor` varchar(20) COLLATE latin1_bin DEFAULT NULL,
+  `nome_fornecedor` varchar(255) COLLATE latin1_bin DEFAULT NULL,
+  `nome_receita_fornecedor` varchar(255) COLLATE latin1_bin DEFAULT NULL,
+  `cod_setor_economico_fornecedor` varchar(20) COLLATE latin1_bin DEFAULT NULL,
+  `setor_economico_fornecedor` varchar(255) COLLATE latin1_bin DEFAULT NULL,
+  `data_despesa` varchar(30) COLLATE latin1_bin DEFAULT NULL,
+  `valor_despesa` decimal(15,2) DEFAULT NULL,
+  `tipo_despesa` varchar(255) COLLATE latin1_bin DEFAULT NULL,
+  `descricao_despesa` varchar(255) COLLATE latin1_bin DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_bin;
