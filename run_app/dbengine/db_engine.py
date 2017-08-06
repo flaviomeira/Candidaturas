@@ -13,6 +13,7 @@ dados_agrup_doadores = Table('dados_agrup_doadores', metadata,
                      Column('partido', String(50), nullable=True),
                      Column('valor', Float(2), nullable=True))
 
+# descomentar para criar tabelas
 # metadata.create_all()
 
 

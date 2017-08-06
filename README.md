@@ -12,3 +12,6 @@ Assim, qualquer pessoa deve ser capaz de saber quem doou para a campanha eleitor
 ```
     pip install -r requirements.txt
 ```
+
+### Acesso
+https://candidaturasdb.herokuapp.com/

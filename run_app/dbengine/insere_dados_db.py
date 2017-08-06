@@ -1,7 +1,6 @@
 from copy import deepcopy
 import pandas as pd
 from sqlalchemy import (create_engine)
-from run_app.dbengine.db_engine import retorna_tabela_completa
 
 
 def preparar_dados_receitasCSV(path_csv=None):
