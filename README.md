@@ -8,10 +8,7 @@ Assim, qualquer pessoa deve ser capaz de saber quem doou para a campanha eleitor
 ### Pre requisitos
 
 * Baixe os dados de eleições a partir do [repositório de dados eleitorais](http://www.tse.jus.br/eleicoes/estatisticas/repositorio-de-dados-eleitorais)
-* Instale os módulos abaixo:
+* Instale os módulos utilizando 
 ```
-    * pip install pandas
-    * pip install matplotlib
+    pip install -r requirements.txt
 ```
-
-
