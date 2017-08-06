@@ -1,4 +1,4 @@
 pandas==0.20.2
 bottle==0.12.13
 SQLAlchemy==1.1.12
-Jinja2==0.23
+Jinja2==2.9.6
