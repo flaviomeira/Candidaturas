@@ -16,6 +16,7 @@ def resumo_doacao():
 
 @route('/css/<filename>')
 def stylesheets(filename):
+    """Possibilitando carregamento dos css estáticos"""
     return static_file(filename, root='./paginas/css')
 
 
