@@ -18,13 +18,24 @@ dados_agrup_doadores = Table('dados_agrup_doadores', metadata,
 
 
 def retorna_tabela_completa():
+    _select = select([column('nome_doador'), column('nome_candidato'), column('partido'), column('valor')]).\
+        select_from(dados_agrup_doadores)
+
     return [dict(doador=x[0], candidato=x[1], partido=x[2], valor=x[3]) for x in
-            select([column('nome_doador'), column('nome_candidato'), column('partido'), column('valor')]).
-            select_from(dados_agrup_doadores).order_by('partido').execute()]
+            _select.order_by('partido').execute()], list(_select.count().execute())[0][0]
 
 
-def retorna_total_registros_tabela():
-    str_sql = 'SELECT COUNT(*) FROM dados_agrup_doadores'
-    resultado = engine.execute(str_sql).fetchone()
-    return resultado[0]
-    # return [x for x in select([dados_agrup_doadores]).count().execute()]
+def lista_partidos():
+    """retorna distinct dos partidos"""
+    return [x[0] for x in select([column('partido')]).distinct().select_from(dados_agrup_doadores).execute()]
+
+
+def filtra_por_partido(_partido):
+    """retorna dados do partido passado por parâmetro"""
+    _select = select([column('nome_doador'), column('nome_candidato'), column('partido'), column('valor')]).\
+        select_from(dados_agrup_doadores).where(column('partido') == _partido)
+    # retorna resultado filtrado e count do resuldato
+
+    return [dict(doador=x[0], candidato=x[1], partido=x[2], valor=x[3]) for x in _select.execute()],\
+           list(_select.count().execute())[0][0]
+
