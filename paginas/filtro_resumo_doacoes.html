@@ -1,0 +1,29 @@
+{% include "paginas/cabecalho_tabelas.html" %}
+
+ <h2>Doações de SP - 2014 - Total de registros do partido {{partido}}: {{ total_registros }}</h2>
+            <div class="table-responsive">
+                <table class="table table-bordered table-hover">
+                    <thead>
+                        <tr>
+                            <th>Partido</th>
+                            <th>Nome Candidato</th>
+                            <th>Nome Doador</th>
+                            <th>Valor</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+        {% for el in filtro_partido%}
+            <tr>
+                <td>{{ el.partido }}</td>
+                <td>{{ el.candidato }}</td>
+                <td>{{ el.doador }}</td>
+                <td>{{ el.valor }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+     </table>
+  </div>
+
+</body>
+</html>
